@@ -10,10 +10,7 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
-    //private ListView cardListView;
-    //private ArrayAdapter<String> listAdapter;
-
-    //private ListView loyaltyListView;
+    private ListView cardListView, loyaltyListView;
 
 
 
@@ -22,58 +19,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //this.cardListView = (ListView)this.findViewById(R.id.cardListView);
-        Core.cardListView = (ListView)this.findViewById(R.id.cardListView);
-        Core.loyaltyListView = (ListView)this.findViewById(R.id.loyaltyListView);
 
+        LinkedList ll = new LinkedList();
+        for(int i = 0; i < 10; i++)
+        {
+            ll.addEnd(i);
+        }
 
-        //for(int i = 0; i < Core.theCardStrings.length; i++)
-        //{
-        //    Core.theCardStrings[i] = "Unknown Card";
-        //}
-        //for(int i = 0; i < 2; i++)
-        //{
-          //  NewCard cc = new NewCard("newCardName" + i,"startDate" + i, i, i);
-          //  Core.theCards[Core.numNewCard] = cc;
-          //  Core.theCardStrings[Core.numNewCard] = cc.toString();
-          //  Core.numNewCard++;
-        //}
+        for(int i = 0; i < ll.length(); i++)
+        {
+            System.out.println("LL: " + ll.getAtIndex(i));
+        }
 
-        //example in class uses "Core.theCardStrings" as last entry under this.listAdapter in ()
-        //use "creditCards" string as last entry to hardcode cards in listview
-        //String[] creditCards = {"Discover", "Chase"};
-        //this.listAdapter = new ArrayAdapter<String>(this, R.layout.creditcard_listview_row2, Core.theCardStrings);
-        //this.cardListView.setAdapter(this.listAdapter);
+        for(int i = 0; i < 1000; i++)
+        {
+            Core.theLoyaltiesStrings[i] = "N/A";
+            Core.theCardsStrings[i] = "N/A";
+            Core.theCards[i] = new NewCard();
+        }
 
-        Core.listAdapter = new ArrayAdapter<String>(this,R.layout.creditcard_listview_row2, Core.stringCardList);
-        Core.cardListView.setAdapter(Core.listAdapter);
+        this.cardListView = (ListView)this.findViewById(R.id.cardListView);
+        this.loyaltyListView = (ListView)this.findViewById(R.id.loyaltyListView);
+        Core.ccCustomAdapter = new CreditCardArrayAdapterForLinkedLists(this, R.layout.custom_credit_card_row, Core.theCardsLL);
+        Core.lpAdapter = new ArrayAdapter(this, R.layout.loyalty_listview_row, Core.theLoyaltiesStrings);
 
-
-
-        //this.loyaltyListView = (ListView)this.findViewById(R.id.loyaltyListView);
-        //for(int j = 0; j < Core.theLoyaltyStrings.length; j++)
-        //{
-         //   Core.theLoyaltyStrings[j] = "Unknown Loyalty";
-        //}
-        //for(int j = 0; j < 2; j++)
-        //{
-         //   NewLoyalty lc =  new NewLoyalty("loyaltyName" + j, "bankAffiliation" + j, j);
-         //   Core.theLoyalties[Core.numNewLoyalty] = lc;
-         //   Core.theLoyaltyStrings[Core.numNewLoyalty] = lc.toString();
-         //   Core.numNewLoyalty++;
-        //}
-
-
-        //example in class uses "Core.theLoyaltyStrings" as last entry under this.listAdapter in ()
-        //use "loyaltyCards" string as last entry to hardcode loyalties in listview
-        //String[] loyaltyCards = {"CashBack", "ChaseRewards"};
-        //this.listAdapter = new ArrayAdapter<String>(this, R.layout.loyalty_listview_row, Core.theLoyaltyStrings);
-        //this.loyaltyListView.setAdapter(this.listAdapter);
-
-        Core.listAdapter = new ArrayAdapter<String>(this, R.layout.loyalty_listview_row, Core.stringLoyaltyList);
-        Core.loyaltyListView.setAdapter(Core.listAdapter);
-
-
+        this.cardListView.setAdapter(Core.ccCustomAdapter);
+        this.loyaltyListView.setAdapter(Core.lpAdapter);
 
 
     }

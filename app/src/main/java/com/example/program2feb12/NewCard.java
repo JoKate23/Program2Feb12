@@ -15,9 +15,43 @@ public class NewCard
         this.rewardPoints = rewardPoints;
     }
 
+    public NewCard()
+    {
+        this.newCardName = "Name";
+        this.startDate = "Start Date";
+        this.minimumSpend = -1;
+        this.rewardPoints = -1;
+
+    }
+
+    public String getNewCardName()
+    {
+        return newCardName;
+    }
+
+    public String getStartDate()
+    {
+        return startDate;
+    }
+
+    public int getMinimumSpend()
+    {
+        return minimumSpend;
+    }
+
+    public int getRewardPoints()
+    {
+        return rewardPoints;
+    }
+
+
+    public String toString()
+    {
+        return this.newCardName + " " + this.startDate + " " + this.minimumSpend + " " + this.rewardPoints + " ";
+    }
+
     public void displayNewCard()
     {
         System.out.println(this.newCardName + " " + this.startDate + " " + this.minimumSpend + " " + this.rewardPoints + " ");
     }
-
 }

@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:visibility="visible"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="395dp"
-        android:layout_height="715dp"
+        android:layout_height="710dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        tools:layout_editor_absoluteY="13dp">
 
         <Button
             android:id="@+id/answerAddCard"
@@ -28,5 +29,19 @@
             android:onClick="onAddLoyaltyButtonPressed"
             android:text="Add Loyalty"
             android:textSize="18sp" />
+
+        <ListView
+            android:id="@+id/cardListView"
+            android:layout_width="435dp"
+            android:layout_height="293dp"
+            android:background="@color/colorAccent"
+            android:visibility="visible" />
+
+        <ListView
+            android:id="@+id/loyaltyListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:visibility="visible" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
