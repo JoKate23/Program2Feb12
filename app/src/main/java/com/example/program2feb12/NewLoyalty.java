@@ -1,10 +1,12 @@
 package com.example.program2feb12;
 
-public class NewLoyalty
+import java.io.Serializable;
+
+public class NewLoyalty implements Serializable
 {
-    private String loyaltyName;
-    private String bankAffiliation;
-    private int currentBalance;
+    public String loyaltyName;
+    public String bankAffiliation;
+    public int currentBalance;
 
     public NewLoyalty(String loyaltyName, String bankAffiliation)
     {
@@ -19,6 +21,11 @@ public class NewLoyalty
         this.currentBalance = currentBalance;
     }
 
+    //no argument constructor required for de-serialization
+    public NewLoyalty()
+    {
+
+    }
 
     public String getLoyaltyName()
     {

@@ -27,25 +27,10 @@ public class NewLoyaltyPageActivity extends AppCompatActivity
         int currentBalance = Integer.parseInt(this.currentBalanceET.getText().toString());
 
         NewLoyalty lp = new NewLoyalty(loyaltyName, bankAffiliation, currentBalance);
-        lp.displayLoyalty();
+        //lp.displayLoyalty();
 
         Core.addLoyaltyProgram(lp);
         this.finish();
-
-        //my attempt at Program#3
-        //Core.currLoyalty = lp;
-        //Core.loyaltyList.add(lp);
-        //Core.stringLoyaltyList.add(loyaltyName + " " + bankAffiliation + " " + currentBalance);
-        //Core.listAdapter.notifyDataSetChanged();
-
-        //takes back to main activity page after submission
-        //takes back without displaying
-        //finish();
-
-        //displays and takes to main activity - MY ATTEMPT
-        //Intent i = new Intent(this, MainActivity.class);
-        //this.startActivity(i);
-
 
     }
 }

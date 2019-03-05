@@ -1,11 +1,13 @@
 package com.example.program2feb12;
 
-public class NewCard
+import java.io.Serializable;
+
+public class NewCard implements Serializable
 {
-    private String newCardName;
-    private String startDate;
-    private int minimumSpend;
-    private int rewardPoints;
+    public String newCardName;
+    public String startDate;
+    public int minimumSpend;
+    public int rewardPoints;
 
     public NewCard(String newCardName, String startDate, int minimumSpend, int rewardPoints)
     {
@@ -15,12 +17,13 @@ public class NewCard
         this.rewardPoints = rewardPoints;
     }
 
+    //no argument constructor required for de-serialization
     public NewCard()
     {
-        this.newCardName = "Name";
-        this.startDate = "Start Date";
-        this.minimumSpend = -1;
-        this.rewardPoints = -1;
+        //this.newCardName = "Name";
+        //this.startDate = "Start Date";
+        //this.minimumSpend = -1;
+        //this.rewardPoints = -1;
 
     }
 

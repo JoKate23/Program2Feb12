@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class LoyaltyProgramArrayAdapterForLinkedLists extends ArrayAdapter
 {
-    private Context mContext;
+    //private Context mContext;
     private LinkedListOfLoyaltyPrograms loyaltyProgramList;
     private int textViewResourceId;
 
@@ -19,7 +19,7 @@ public class LoyaltyProgramArrayAdapterForLinkedLists extends ArrayAdapter
                                                 LinkedListOfLoyaltyPrograms list)
     {
         super(context, textViewResourceId);
-        this.mContext = context;
+        //this.mContext = context;
         this.loyaltyProgramList = list;
         this.textViewResourceId = textViewResourceId;
     }
@@ -36,7 +36,7 @@ public class LoyaltyProgramArrayAdapterForLinkedLists extends ArrayAdapter
     {
         View listItem = convertView;
         if (listItem == null) {
-            listItem = LayoutInflater.from(mContext).
+            listItem = LayoutInflater.from(super.getContext()).
                     inflate(this.textViewResourceId, parent, false);
         }
 
