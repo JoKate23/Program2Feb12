@@ -43,16 +43,16 @@ public class EditCreditCardActivity extends AppCompatActivity
     public void onUpdateButtonPressed(View v)
     {
 
-        //Core.currentSelectedCard.delete();
+        Core.currentSelectedCard.delete();
 
         String newCardName = this.newCardNameET.getText().toString();
         String newCardStartDate = this.newCardStartDateET.getText().toString();
         int newCardMinimumSpend = Integer.parseInt(this.newCardMinimumSpendET.getText().toString());
         int newCardRewardPoints = Integer.parseInt(this.newCardRewardPointsET.getText().toString());
 
-        //NewCard ucc = new NewCard(newCardName, newCardStartDate, newCardMinimumSpend, newCardRewardPoints);
-        //Core.addCreditCardToFirebase(ucc);
-        //this.finish();
+        NewCard ucc = new NewCard(newCardName, newCardStartDate, newCardMinimumSpend, newCardRewardPoints);
+        Core.addCreditCardToFirebase(ucc);
+        this.finish();
 
     }
 
