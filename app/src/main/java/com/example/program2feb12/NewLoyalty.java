@@ -1,5 +1,7 @@
 package com.example.program2feb12;
 
+import com.google.firebase.database.DatabaseReference;
+
 import java.io.Serializable;
 
 public class NewLoyalty implements Serializable
@@ -7,6 +9,9 @@ public class NewLoyalty implements Serializable
     public String loyaltyName;
     public String bankAffiliation;
     public int currentBalance;
+    private String key;
+    private DatabaseReference ref;
+
 
     public NewLoyalty(String loyaltyName, String bankAffiliation)
     {
@@ -27,20 +32,33 @@ public class NewLoyalty implements Serializable
 
     }
 
-    public String getLoyaltyName()
+    public void save(String loyaltyName, String bankAffiliation, int currentBalance)
     {
-        return loyaltyName;
+        this.loyaltyName = loyaltyName;
+        this.bankAffiliation = bankAffiliation;
+        this.currentBalance = currentBalance;
+        this.save();
     }
 
-    public String getBankAffiliation()
+    public void save()
     {
-        return bankAffiliation;
+        //save to the database the current state of this Loyalty Program
+        this.ref.setValue(this);
     }
 
-    public int getCurrentBalance()
+    public void delete()
     {
-        return currentBalance;
+        this.ref.removeValue();
     }
+
+    public void setKey(String key)
+    {
+        this.key = key;
+        this.ref = Core.loyaltyProgramRef.child(this.key);
+    }
+
+
+
 
     public String toString()
     {

@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 public class LoyaltyProgramArrayAdapterForLinkedLists extends ArrayAdapter
 {
-    //private Context mContext;
     private LinkedListOfLoyaltyPrograms loyaltyProgramList;
     private int textViewResourceId;
 
@@ -19,7 +18,6 @@ public class LoyaltyProgramArrayAdapterForLinkedLists extends ArrayAdapter
                                                 LinkedListOfLoyaltyPrograms list)
     {
         super(context, textViewResourceId);
-        //this.mContext = context;
         this.loyaltyProgramList = list;
         this.textViewResourceId = textViewResourceId;
     }
@@ -45,9 +43,9 @@ public class LoyaltyProgramArrayAdapterForLinkedLists extends ArrayAdapter
         TextView lpCurrentBalance = (TextView) listItem.findViewById(R.id.lpCurrentBalanceTV);
         NewLoyalty lp = this.loyaltyProgramList.getAtIndex(position);
 
-        lpLoyaltyName.setText(lp.getLoyaltyName());
-        lpBankAffiliation.setText(lp.getBankAffiliation());
-        lpCurrentBalance.setText("" + lp.getCurrentBalance());
+        lpLoyaltyName.setText(lp.loyaltyName);
+        lpBankAffiliation.setText(lp.bankAffiliation);
+        lpCurrentBalance.setText("" + lp.currentBalance);
         //return the View after we have set all of the values
         return listItem;
 

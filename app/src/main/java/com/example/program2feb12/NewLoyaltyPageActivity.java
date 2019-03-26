@@ -29,7 +29,7 @@ public class NewLoyaltyPageActivity extends AppCompatActivity
         NewLoyalty lp = new NewLoyalty(loyaltyName, bankAffiliation, currentBalance);
         //lp.displayLoyalty();
 
-        Core.addLoyaltyProgram(lp);
+        Core.addLoyaltyProgramToFirebase(lp);
         this.finish();
 
     }

@@ -30,9 +30,9 @@ public class NewCardPageActivity extends AppCompatActivity
         int rewardPoints = Integer.parseInt(this.rewardPointsET.getText().toString());
 
         NewCard cc = new NewCard(newCardName, startDate, minimumSpend, rewardPoints);
-        cc.displayNewCard();
+        //cc.displayNewCard();
 
-        Core.addCreditCard(cc);
+        Core.addCreditCardToFirebase(cc);
         this.finish();
 
 

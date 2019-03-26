@@ -30,18 +30,26 @@
             android:text="Add Loyalty"
             android:textSize="18sp" />
 
+        <Button
+            android:id="@+id/airportListButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onAirportListButtonPressed"
+            android:text="Airport List" />
+
         <ListView
             android:id="@+id/cardListView"
             android:layout_width="435dp"
             android:layout_height="293dp"
-            android:background="@color/colorAccent"
             android:visibility="visible" />
+
 
         <ListView
             android:id="@+id/loyaltyListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
             android:visibility="visible" />
+
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

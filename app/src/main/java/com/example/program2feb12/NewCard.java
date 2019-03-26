@@ -1,5 +1,7 @@
 package com.example.program2feb12;
 
+import com.google.firebase.database.DatabaseReference;
+
 import java.io.Serializable;
 
 public class NewCard implements Serializable
@@ -8,6 +10,8 @@ public class NewCard implements Serializable
     public String startDate;
     public int minimumSpend;
     public int rewardPoints;
+    private String key;
+    private DatabaseReference ref;
 
     public NewCard(String newCardName, String startDate, int minimumSpend, int rewardPoints)
     {
@@ -27,25 +31,24 @@ public class NewCard implements Serializable
 
     }
 
-    public String getNewCardName()
+    public void setKey(String key)
     {
-        return newCardName;
+        this.key = key;
+        this.ref = Core.creditCardRef.child(this.key);
     }
 
-    public String getStartDate()
+    public void save()
     {
-        return startDate;
+        this.ref.setValue(this);
     }
 
-    public int getMinimumSpend()
+    public void delete()
     {
-        return minimumSpend;
+        this.ref.removeValue();
     }
 
-    public int getRewardPoints()
-    {
-        return rewardPoints;
-    }
+
+    //no longer need "getters"
 
 
     public String toString()
