@@ -23,9 +23,10 @@ public class AirportListActivity extends AppCompatActivity
     private ListView airportLV;
     private LinkedList<String> theAirportStrings = new LinkedList<String>();
     private LinkedList<Airport> theAirports = new LinkedList<Airport>();
+    private LinkedList<Airport> theFilteredAirports = new LinkedList<Airport>();
     private ArrayAdapter<String> aa;
     private EditText filterET;
-    private AirportListActivity mycontext;
+    private AirportListActivity myself;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,49 +34,50 @@ public class AirportListActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_airport_list);
 
+        this.myself = this;
         this.filterET = this.findViewById(R.id.filterET);
         this.airportLV = this.findViewById(R.id.airportsLV);
         //another row is textview for holding string - create from Litman code
         aa = new ArrayAdapter<String>(this, R.layout.another_row, this.theAirportStrings);
         this.airportLV.setAdapter(aa);
-        this.mycontext = this;
 
-
-        //trying to make it so when the item in the airport LV is clicked, user moves to another page with flight information
-        //not sure what's going wrong here... may have mixed up LV and LL
-        this.airportLV.setClickable(true);
         this.airportLV.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long row_id)
-            {
-                String selectedAirport = (String)airportLV.getItemAtPosition(position);
-                Intent i = new Intent(mycontext, FlightActivity.class);
-                Core.currentSelectedAirport = selectedAirport;
-                mycontext.startActivity(i);
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long row_id) {
+
+                Intent i = new Intent(myself, AirportDetailActivity.class);
+                Airport selectedAirport = myself.theFilteredAirports.get(position);
+                i.putExtra("airportCode", selectedAirport.airportCode);
+                myself.startActivity(i);
+
             }
+
         });
 
 
         DatabaseReference ref = Core.database.getReference("world_airports");
-        //single time does not do over and over again
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.addListenerForSingleValueEvent(new ValueEventListener()
+        {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
                 Airport temp;
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                for(DataSnapshot ds : dataSnapshot.getChildren())
+                {
                     temp = ds.getValue(Airport.class);
                     theAirports.add(temp);
                     theAirportStrings.add(temp.toString());
                 }
                 aa.notifyDataSetChanged();
-                //System.out.println("*** " + dataSnapshot.toString());
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError)
+            {
 
             }
+
         });
 
 
@@ -85,11 +87,13 @@ public class AirportListActivity extends AppCompatActivity
     {
         String filterString = this.filterET.getText().toString();
         this.theAirportStrings.clear();
+        this.theFilteredAirports.clear();
         for(Airport a : this.theAirports)
         {
             if(a.filterApplies(filterString))
             {
                 this.theAirportStrings.add(a.toString());
+                this.theFilteredAirports.add(a);
             }
         }
         this.aa.notifyDataSetChanged();

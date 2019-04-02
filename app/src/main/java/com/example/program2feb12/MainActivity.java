@@ -20,7 +20,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-import static com.example.program2feb12.Core.currentAirportCode;
 import static com.example.program2feb12.Core.database;
 
 public class MainActivity extends AppCompatActivity
@@ -35,20 +34,14 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        //for capture of URL using NetworkThread class created
-        //comment out when done uploading to database
-
-        //fill in with other information when grabbing flight info
-
-        NetworkThread nt = new NetworkThread("flights");
+       // NetworkThread nt = new NetworkThread("flights");
         //NetworkThread nt = new NetworkThread(Core.currentSelectedAirport);
-        nt.start();
+        //nt.start();
 
 
         this.myCurrentActivity = this;
 
-        database = FirebaseDatabase.getInstance();
+        Core.database = FirebaseDatabase.getInstance();
         Core.creditCardRef = database.getReference("creditCards");
         Core.loyaltyProgramRef = database.getReference("loyaltyPrograms");
 
@@ -116,7 +109,7 @@ public class MainActivity extends AppCompatActivity
                     //System.out.println("******** " + ds.toString());
 
                     //de-serialize the card
-                    System.out.println("******** " + ds.toString());
+                    System.out.println("*** Adding value");
                     NewCard tempCC = ds.getValue(NewCard.class);
                     tempCC.setKey(ds.getKey());
                     Core.addCreditCardLocally(tempCC);
@@ -151,7 +144,7 @@ public class MainActivity extends AppCompatActivity
                     //tried to insert initial set of loyalty programs
                     //Core.initialLoyaltyPrograms(lp);
                     //de=serialize the card
-                    System.out.println("******** " + ds.toString());
+                    System.out.println("*** Adding value");
                     NewLoyalty tempLP = ds.getValue(NewLoyalty.class);
                     tempLP.setKey(ds.getKey());
                     Core.addLoyaltyProgramLocally(tempLP);
