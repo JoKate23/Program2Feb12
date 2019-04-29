@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         BinaryTree bt = new BinaryTree();
+
         bt.addValue(5);
         bt.addValue(2);
         bt.addValue(1);
@@ -186,6 +187,12 @@ public class MainActivity extends AppCompatActivity
     public void onAddLoyaltyButtonPressed(View v)
     {
         Intent j = new Intent(this, NewLoyaltyPageActivity.class);
+        this.startActivity(j);
+    }
+
+    public void onBinaryTreeButtonPressed(View v)
+    {
+        Intent j = new Intent(this, BinaryTreeActivity.class);
         this.startActivity(j);
     }
 

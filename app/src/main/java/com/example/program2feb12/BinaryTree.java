@@ -15,8 +15,9 @@ public class BinaryTree
         {
             System.out.println("*** In Order:" + this.root.visitInOrder());
         }
-
     }
+
+
 
     public void visitPostOrder()
     {
@@ -26,6 +27,7 @@ public class BinaryTree
         }
     }
 
+
     public void visitPreOrder()
     {
         if(this.root != null)
@@ -34,9 +36,11 @@ public class BinaryTree
         }
     }
 
+
     public void addValue(int payload)
     {
         BTreeNode n = new BTreeNode(payload);
+
         if(this.root == null)
         {
             this.root = n;
@@ -44,7 +48,24 @@ public class BinaryTree
         else
         {
             //My tree has stuff in it
-            this.root.addNode(n);
+            //this.root.addNode(n);
+            if(n.getPayload() <= this.root.getPayload())
+            {
+                //add to the left
+                if(this.root.getLeftChild() == null)
+                {
+                    this.root.setLeftChild(n);
+                }
+            }
+            else
+            {
+                //add to the right
+                if(this.root.getRightChild() == null)
+                {
+                    this.root.setRightChild(n);
+                }
+            }
+
         }
     }
 
