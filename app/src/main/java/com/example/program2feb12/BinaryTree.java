@@ -6,7 +6,7 @@ public class BinaryTree
 
     public BinaryTree()
     {
-        this.root = null;
+        this.root = Airport.get(0);
     }
 
     public void visitInOrder()

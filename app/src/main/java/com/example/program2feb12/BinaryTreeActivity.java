@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -25,14 +26,15 @@ public class BinaryTreeActivity extends AppCompatActivity
         this.rightButton = this.findViewById(R.id.rightButton);
 
         //get tree owned by this activity???
-        if(this.getIntent().hasExtra("myTreeCode"))
+        if(this.getIntent().hasExtra("airportCode"))
         {
-            String myTreeCode = this.getIntent().getStringExtra("myTreeCode");
-            this.myTree = Core.theVault.getTreeWithSuperSecretCode(myTreeCode); //(BinaryTree2)this.getIntent().getSerializableExtra("myTree");
+            String airportCode = this.getIntent().getStringExtra("airportCode");
+            this.myTree = Core.theVault.getTreeWithSuperSecretCode(airportCode); //(BinaryTree2)this.getIntent().getSerializableExtra("myTree");
 
         }
         else
         {
+            //if nothing fills with the if statement - this will build tree
             //this must be screen 1
             this.myTree = new BinaryTree2(5);
             this.myTree.add(2);
@@ -44,6 +46,23 @@ public class BinaryTreeActivity extends AppCompatActivity
 
         this.payloadTV.setText("" + this.myTree.payload);
         this.hideButtonsIfNeeded();
+
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                Log.d(TAG, "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
 
     }
 
@@ -63,7 +82,7 @@ public class BinaryTreeActivity extends AppCompatActivity
     public void onLeftButtonClicked(View vy)
     {
         Intent i = new Intent(this, BinaryTreeActivity.class);
-        i.putExtra("myTreeCode", "" + Core.currentCode); //passing the secret code
+        i.putExtra("airportCode", "" + Core.currentCode); //passing the secret code
         Core.theVault.addTree("" + Core.currentCode, this.myTree.left);
         Core.currentCode++;
         this.startActivity(i);
@@ -72,7 +91,7 @@ public class BinaryTreeActivity extends AppCompatActivity
     public void onRightButtonClicked(View vy)
     {
         Intent i = new Intent(this, BinaryTreeActivity.class);
-        i.putExtra("myTreeCode", "" + Core.currentCode);
+        i.putExtra("airportCode", "" + Core.currentCode);
         Core.theVault.addTree("" + Core.currentCode, this.myTree.right);
         Core.currentCode++;
         this.startActivity(i);
