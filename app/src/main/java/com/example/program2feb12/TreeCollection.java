@@ -13,16 +13,16 @@ public class TreeCollection
         this.theMappings = new LinkedList<TreeValue>();
     }
 
-    public void addTree(String secretCode, BinaryTree2 tree)
+    public void addTree(String airportCode, BinaryTree2 tree)
     {
-        this.theMappings.add(new TreeValue(secretCode, tree));
+        this.theMappings.add(new TreeValue(airportCode, tree));
     }
 
-    public BinaryTree2 getTreeWithSuperSecretCode(String secretCode)
+    public BinaryTree2 getTreeWithSuperSecretCode(String airportCode)
     {
         for(TreeValue tv : this.theMappings)
         {
-            if(tv.secretCode.equals(secretCode))
+            if(tv.airportCode.equals(airportCode))
             {
                 return tv.tree;
             }

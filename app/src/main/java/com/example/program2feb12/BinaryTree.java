@@ -18,7 +18,6 @@ public class BinaryTree
     }
 
 
-
     public void visitPostOrder()
     {
         if(this.root != null)

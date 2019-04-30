@@ -25,9 +25,10 @@ public class BinaryTreeActivity extends AppCompatActivity
         this.rightButton = this.findViewById(R.id.rightButton);
 
         //get tree owned by this activity???
-        if(this.getIntent().hasExtra("myTree"))
+        if(this.getIntent().hasExtra("myTreeCode"))
         {
-            this.myTree = (BinaryTree2)this.getIntent().getSerializableExtra("myTree");
+            String myTreeCode = this.getIntent().getStringExtra("myTreeCode");
+            this.myTree = Core.theVault.getTreeWithSuperSecretCode(myTreeCode); //(BinaryTree2)this.getIntent().getSerializableExtra("myTree");
 
         }
         else
@@ -62,14 +63,18 @@ public class BinaryTreeActivity extends AppCompatActivity
     public void onLeftButtonClicked(View vy)
     {
         Intent i = new Intent(this, BinaryTreeActivity.class);
-        i.putExtra("myTree", this.myTree.left);
+        i.putExtra("myTreeCode", "" + Core.currentCode); //passing the secret code
+        Core.theVault.addTree("" + Core.currentCode, this.myTree.left);
+        Core.currentCode++;
         this.startActivity(i);
     }
 
     public void onRightButtonClicked(View vy)
     {
         Intent i = new Intent(this, BinaryTreeActivity.class);
-        i.putExtra("myTree", this.myTree.right);
+        i.putExtra("myTreeCode", "" + Core.currentCode);
+        Core.theVault.addTree("" + Core.currentCode, this.myTree.right);
+        Core.currentCode++;
         this.startActivity(i);
     }
 
