@@ -4,9 +4,9 @@ public class BinaryTree
 {
     private BTreeNode root;
 
-    public BinaryTree()
+   // public BinaryTree()
     {
-        this.root = Airport.get(0);
+     //   this.root = Airport.get(0);
     }
 
     public void visitInOrder()

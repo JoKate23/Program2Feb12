@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.program2feb12.Yelp.YelpAPI;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,8 +35,11 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BinaryTree bt = new BinaryTree();
 
+        YelpAPI yelp = new YelpAPI();
+        yelp.start();
+
+        BinaryTree bt = new BinaryTree();
         bt.addValue(5);
         bt.addValue(2);
         bt.addValue(1);
@@ -45,6 +49,12 @@ public class MainActivity extends AppCompatActivity
         bt.visitInOrder();;
         bt.visitPostOrder();
         bt.visitPreOrder();
+
+        String obj1 = "MKE";
+        String obj2 = "ATL";
+        String obj3 = new String ("atl");
+
+        System.out.println("*** LOL" + obj2.compareTo(obj2));
 
         this.myCurrentActivity = this;
 
@@ -190,11 +200,7 @@ public class MainActivity extends AppCompatActivity
         this.startActivity(j);
     }
 
-    public void onBinaryTreeButtonPressed(View v)
-    {
-        Intent j = new Intent(this, BinaryTreeActivity.class);
-        this.startActivity(j);
-    }
+
 
 
 

@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.program2feb12.AirportTreePackage.AirportTree;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +28,9 @@ public class AirportListActivity extends AppCompatActivity
     private ArrayAdapter<String> aa;
     private EditText filterET;
     private AirportListActivity myself;
+    private AirportTree atree = new AirportTree();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -34,13 +38,15 @@ public class AirportListActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_airport_list);
 
+
         this.myself = this;
         this.filterET = this.findViewById(R.id.filterET);
-        this.airportLV = this.findViewById(R.id.airportsLV);
+        this.airportLV = this.findViewById(R.id.airportLV);
         //another row is textview for holding string - create from Litman code
         aa = new ArrayAdapter<String>(this, R.layout.another_row, this.theAirportStrings);
         this.airportLV.setAdapter(aa);
 
+        this.airportLV.setClickable(true);
         this.airportLV.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -61,7 +67,6 @@ public class AirportListActivity extends AppCompatActivity
 
         });
 
-
         DatabaseReference ref = Core.database.getReference("world_airports");
         ref.addListenerForSingleValueEvent(new ValueEventListener()
         {
@@ -69,12 +74,35 @@ public class AirportListActivity extends AppCompatActivity
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
                 Airport temp;
+                AirportTree atree = new AirportTree(); //
+                //LinkedList<String> keys = new LinkedList<String>();
                 for(DataSnapshot ds : dataSnapshot.getChildren())
                 {
                     temp = ds.getValue(Airport.class);
+                    atree.add(temp);
+                    //temp.sanitize();
                     theAirports.add(temp);
+                    //keys.add(ds.getKey());
                     theAirportStrings.add(temp.toString());
+                    break;
                 }
+
+                /*
+                for(int i = 0; i < theAirports.size(); i++)
+                {
+                    Airport a = theAirports.get(i);
+                    String key = keys.get(i);
+                    if(a.isLegalCode())
+                    {
+                        Core.database.getReference("world_airports").child(key).setValue(a);
+                    }
+                    else
+                    {
+                        Core.database.getReference("world_airports").child(key).removeValue();
+                    }
+                }
+                 */
+                atree.visitInOrder();
                 aa.notifyDataSetChanged();
             }
 
@@ -87,6 +115,15 @@ public class AirportListActivity extends AppCompatActivity
         });
 
 
+    }
+
+    public void onMarakaClick(View v)
+    {
+        Intent i = new Intent(this, AirportTreeViewActivity.class);
+        //i.putExtra("aTree", this.atree.getRoot());
+        Core.currTree = this.atree.getRoot();
+        this.startActivity(i);
+        System.out.println("**** I'M HIT");
     }
 
     public void onFilterButtonPressed(View v)

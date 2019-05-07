@@ -5,15 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".BinaryTreeActivity">
+    tools:context=".AirportTreeViewActivity">
+
+    <Button
+        android:id="@+id/yelpSearchButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onYelpButtonPressed"
+        android:text="Yelp Search" />
 
     <TextView
-        android:id="@+id/payloadTV"
+        android:id="@+id/airportCodeTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Payload"
-        android:textSize="30sp" />
+        android:text="Airport Code"
+        android:textSize="50sp" />
+
+    <TextView
+        android:id="@+id/locationTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="City, State"
+        android:textSize="24sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="onLeftButtonClicked"
-            android:text="Left Child" />
+            android:text="LEFT" />
 
         <Button
             android:id="@+id/rightButton"
@@ -34,6 +48,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="onRightButtonClicked"
-            android:text="Right Child" />
+            android:text="Right" />
     </LinearLayout>
 </LinearLayout>

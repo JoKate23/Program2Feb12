@@ -20,6 +20,13 @@
             android:onClick="onFilterButtonPressed"
             android:text="Filter" />
 
+        <Button
+            android:id="@+id/marakaButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onMarakaClick"
+            android:text="Maraka" />
+
         <EditText
             android:id="@+id/filterET"
             android:layout_width="match_parent"
@@ -29,7 +36,7 @@
             android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/airportListTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -38,7 +45,7 @@
             android:textStyle="bold" />
 
         <ListView
-            android:id="@+id/airportsLV"
+            android:id="@+id/airportLV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
